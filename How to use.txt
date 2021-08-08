@@ -1,0 +1,87 @@
+The library is used to write variables to permanent memory.
+
+// using the library
+	using Prefer_Save;
+
+// Declare an instance
+	string path = @ "C:\ProgramData\text.txt";
+	PreferSave ps = new PreferSave(path); // if there is no file, then it will be created
+          
+// You can set the ability to write asynchronously
+	ps.AsyncWrite = false; // without setting the parameter, the variables are written to the file synchronously
+
+// You can set a new path for a new file, if there is no file, then it will be created
+	string newPath = @ "C:\ProgramData\text2.txt";
+	ps.SetNewPath(newPath);
+
+// Operation with strings
+	ps.String ("abc").Set("text"); // writes the value
+	string a = ps.String("abc").Get (); // reads the value
+	ps.String ("abc").Delete(); // deletes the line
+// Operations with numbers
+	ps.Int ("abc").Set (10000); // writes the value
+	int a = ps.Int ("abc").Get().ToString(); // reads the value
+	ps.Int ("abc").Delete(); // removes the number from memory
+
+	ps.Long ("abc").Set(12414124123); // writes the value
+	Long a = ps.Long("abc").Get(); // reads the value
+	ps.Long ("abc").Delete(); // removes the number from memory
+
+	ps.Decimal ("abc").Set(12414124123.2342m); // writes the value
+	Decimal a = ps.Decimal("abc"). Get (); // reads the value
+	ps.Decimal ("abc").Delete(); // removes the number from memory
+
+	ps.Double ("abc").Set (124141.253); // writes the value
+	Double a = ps.Double("abc").Get(); // reads the value
+	ps.Double ("abc").Delete (); // removes the number from memory
+
+	ps.Float ("abc").Set(124141.253); // writes the value
+	Float a = ps.Float("abc").Get (); // reads the value
+	ps.Float ("abc").Delete(); // removes the number from memory
+
+// Operations with boolean variables
+	ps.Bool ("abc").Set (true); // writes the value
+	bool a = ps.Bool("abc").Get (); // reads the value
+	ps.Bool ("abc").Delete(); // deletes the line
+
+
+// Release the resources used by the class instance
+	ps.Dispose();
+
+// Check for the existence of variables with the given name and type
+	if(ps.HasInt("abc")) {
+
+		// something is done here if a variable of type int and name abc exists
+
+	}
+	if(ps.HasString("abc")) {
+
+		// something is done here if a variable of type string and name abc exists
+
+	}
+	if(ps.HasLong("abc")) {
+
+		// something is done here if a variable of type long and name abc exists
+
+	}
+
+// Check for the presence of any variable of any type with the given name
+	if(ps.HasName("abc")) {
+
+		// something is done here if a variable of any type with the name abc exists
+		/ *
+		that is, if there is an Int ("abc") or Bool ("abc"), String ("abc") and so on ..
+		then this if will be executed
+		* /
+
+
+	}
+	/ *
+ 		The library supports many data types
+ 		int
+ 		string
+ 		bool
+ 		long
+ 		double
+		 float
+	* /
